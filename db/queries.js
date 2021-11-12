@@ -15,14 +15,17 @@ class EmployeeDatabase {
     return this.connection.query("SELECT * FROM employee");
   }
   addDept(newDept) {
-    return this.connection.query("INSERT INTO department (name) VALUES ?", newDept);
+    return this.connection.query("INSERT INTO department (name) VALUES (?)", newDept);
   }
-  addRole(newRole) {
-    return this.connection.query("INSERT INTO role (dept_id, title, salary) VALUES ?", newRole);
+  addRole(newRoleDept, newRoleName, newRoleSal) {
+    return this.connection.query(
+      "INSERT INTO role (dept_id, title, salary) VALUES (?)",
+      (newRoleDept, newRoleName, newRoleSal)
+    );
   }
   addEmployee(newEmployee) {
     return this.connection.query(
-      "INSERT INTO employees (role_id, first_name, last_name, manager_id) VALUES ?",
+      "INSERT INTO employee (role_id, first_name, last_name, manager_id) VALUES (?)",
       newEmployee
     );
   }

@@ -36,6 +36,7 @@ const runPromts = () => {
           break;
         case "Add Employee":
           addEmployee();
+          break;
         case "Update Employee Role":
           updateEmployeeRole();
         case "View All Roles":
@@ -46,6 +47,7 @@ const runPromts = () => {
           break;
         case "Add Role":
           addRole();
+          break;
         case "View All Deptarments":
           query.viewDept().then((data) => {
             console.table(data);
@@ -54,6 +56,7 @@ const runPromts = () => {
           break;
         case "Add Department":
           addDeptarment();
+          break;
         case "Quit":
           console.log("Goodbye"), process.exit();
         default:
@@ -72,10 +75,12 @@ function addDeptarment() {
       },
     ])
     .then((response) => {
-      const newDept = `(${response.newDept})`;
-      query.addDept(newDept);
-      console.log("New Deptartment Added");
-      runPromts();
+      const newDept = `${response.newDept}`;
+      query.addDept(newDept).then(() => {
+        console.log("New Deptartment Added");
+        runPromts();
+      });
+      // console.log("New Deptartment Added");
     });
 }
 
@@ -84,7 +89,7 @@ function addRole() {
     .prompt([
       {
         type: "input",
-        name: "newRole",
+        name: "newRoleName",
         message: "What is the title of the new Role?",
       },
       {
@@ -99,10 +104,13 @@ function addRole() {
       },
     ])
     .then((response) => {
-      const newRole = `(${response.newRole}, ${response.newRoleSal}, ${response.newRoleDept})`;
-      query.addDept(newRole);
-      console.log("New Role Added");
-      runPromts();
+      const newRoleDept = parseInt(response.newRoleDept);
+      const newRoleName = `${response.newRoleName}`;
+      const newRoleSal = parseInt(response.newRoleSal);
+      query.addRole(newRoleDept, newRoleName, newRoleSal).then(() => {
+        console.log("New Role Added");
+        runPromts();
+      });
     });
 }
 
@@ -111,20 +119,31 @@ function addEmployee() {
     .prompt([
       {
         type: "input",
-        name: "newEmployee",
+        name: "newEmployeeFirst",
         message: "What is the first name of the new Employee?",
       },
       {
         type: "input",
+        name: "newEmployeeLast",
+        message: "What is the last name of the new Employee?",
+      },
+      {
+        type: "input",
         name: "newEmployeeRole",
-        message: "What is the ",
+        message: "What is the employee's role?",
+      },
+      {
+        type: "input",
+        name: "newEmployeeManger",
+        message: "Who is the new Employee's manager?",
       },
     ])
     .then((response) => {
-      const newEmployee = response;
-      query.addDept(newEmployee);
-      console.log("New Employee Added");
-      runPromts();
+      const newEmployee = `(${response.newEmployeeRole}, ${response.newEmployeeFirst}, ${response.newEmployeeLast}, ${response.newEmployeeManger})`;
+      query.addEmployee(newEmployee).then(() => {
+        console.log("New Employee Added");
+        runPromts();
+      });
     });
 }
 
