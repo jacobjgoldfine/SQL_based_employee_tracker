@@ -29,7 +29,7 @@ const runPromts = () => {
       const answers = response.mainPrompts;
       switch (answers) {
         case "View all Employees":
-          query.viewDept().then((data) => {
+          query.viewEmployees().then((data) => {
             console.table(data);
             runPromts();
           });
@@ -63,8 +63,8 @@ const runPromts = () => {
 };
 
 function addDeptarment() {
-  inquierer
-    .promt([
+  inquirer
+    .prompt([
       {
         type: "input",
         name: "newDept",
@@ -80,8 +80,8 @@ function addDeptarment() {
 }
 
 function addRole() {
-  inquierer
-    .promt([
+  inquirer
+    .prompt([
       {
         type: "input",
         name: "newRole",
@@ -100,15 +100,15 @@ function addRole() {
     ])
     .then((response) => {
       const newRole = `(${response.newRole}, ${response.newRoleSal}, ${response.newRoleDept})`;
-      query.addDept(newDept);
-      console.log("New Deptartment Added");
+      query.addDept(newRole);
+      console.log("New Role Added");
       runPromts();
     });
 }
 
 function addEmployee() {
-  inquierer
-    .promt([
+  inquirer
+    .prompt([
       {
         type: "input",
         name: "newEmployee",
@@ -121,9 +121,9 @@ function addEmployee() {
       },
     ])
     .then((response) => {
-      const newDept = response;
-      query.addDept(newDept);
-      console.log("New Deptartment Added");
+      const newEmployee = response;
+      query.addDept(newEmployee);
+      console.log("New Employee Added");
       runPromts();
     });
 }

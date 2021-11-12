@@ -21,11 +21,14 @@ class EmployeeDatabase {
     return this.connection.query("INSERT INTO role (dept_id, title, salary) VALUES ?", newRole);
   }
   addEmployee(newEmployee) {
-    return this.connection.query("INSERT INTO employees (role_id, first_name, last_name, manager_id) VALUES ?", newEmployee);
+    return this.connection.query(
+      "INSERT INTO employees (role_id, first_name, last_name, manager_id) VALUES ?",
+      newEmployee
+    );
   }
-  updateEmployees(updateEmployee) {
-    return this.connection.query("UPDATE ");
-  }
+  // updateEmployees(updateEmployee) {
+  //   return this.connection.query("UPDATE ");
+  // }
 }
 
 module.exports = EmployeeDatabase;
