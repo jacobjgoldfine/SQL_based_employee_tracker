@@ -15,7 +15,6 @@ const runPromts = () => {
         choices: [
           "View all Employees",
           "Add Employee",
-          "Update Employee Role",
           "View All Roles",
           "Add Role",
           "View All Deptarments",

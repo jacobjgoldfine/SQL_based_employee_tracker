@@ -29,9 +29,6 @@ class EmployeeDatabase {
       newEmployee
     );
   }
-  // updateEmployees(updateEmployee) {
-  //   return this.connection.query("UPDATE ");
-  // }
 }
 
 module.exports = EmployeeDatabase;
